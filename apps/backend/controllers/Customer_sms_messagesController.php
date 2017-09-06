@@ -225,12 +225,6 @@ class Customer_sms_messagesController extends Controller
         }
     }
 
-    public function actionBatch_Callback()
-    {
-        $input = file_get_contents("php://input");
-        Yii::log($input, CLogger::LEVEL_ERROR);
-    }
-
     /**
      * Callback method to set the editor options for email footer in campaigns
      */

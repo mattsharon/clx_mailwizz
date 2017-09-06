@@ -139,6 +139,9 @@ return array(
                 array('customer_sms_messages/<action>', 'pattern' => 'customers/sms/messages/<action:(\w+)>/*'),
                 array('customer_sms_messages/<action>', 'pattern' => 'customers/sms/messages/<action:(\w+)>'),
 
+                array('sms_callback/delivery_status', 'pattern' => '/sms/delivery/status'),
+                array('sms_callback/inbounce_messages', 'pattern' => '/sms/inbounce/messages'),
+
                 array('customer_login_logs/index', 'pattern' => 'customers/login-logs'),
                 array('customer_login_logs/<action>', 'pattern' => 'customers/login-logs/<action:(\w+)>/*'),
                 array('customer_login_logs/<action>', 'pattern' => 'customers/login-logs/<action:(\w+)>'),
@@ -250,6 +253,6 @@ return array(
     // using Yii::app()->params['paramName']
     'params' => array(
         // list of controllers where the user doesn't have to be logged in.
-        'unprotectedControllers' => array('guest')
+        'unprotectedControllers' => array('guest','sms_callback')
     ),
 );
