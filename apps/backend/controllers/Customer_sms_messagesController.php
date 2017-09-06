@@ -67,7 +67,7 @@ class Customer_sms_messagesController extends Controller
                     $batchParams->setSender('123456789');
                     $batchParams->setRecipients([$message->customer_phone]);
                     $batchParams->setBody($message->sms_message);
-                    $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::SUMMARY);
+                    $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
                     $batchParams->setCallbackUrl(MW_SMS_DELIBERY_CALLBACK_PATH);
                     $msg = $client->createTextBatch($batchParams);
                     $batch = $client->fetchBatch($msg->getBatchId());

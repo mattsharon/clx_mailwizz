@@ -25,10 +25,10 @@ class Sms_callbackController extends Controller
 
     public function actionDelivery_Status()
     {
-        $request = Yii::app()->request;
-        $arr_status = (array)$request->getQuery();
-        $output = implode(', ', array_map( function ($v, $k) { return sprintf("%s='%s'", $k, $v); }, $arr_status, array_keys($arr_status)));
-        Yii::log($output, CLogger::LEVEL_ERROR);
+        $request = Yii::app()->request->getRawBody();
+        // $arr_status = json_encode($request);
+        
+        Yii::log($request, CLogger::LEVEL_ERROR);
     }
 
     public function actionInbounce_Messages()
