@@ -139,8 +139,8 @@ return array(
                 array('customer_sms_messages/<action>', 'pattern' => 'customers/sms/messages/<action:(\w+)>/*'),
                 array('customer_sms_messages/<action>', 'pattern' => 'customers/sms/messages/<action:(\w+)>'),
 
-                array('sms_callback/delivery_status', 'pattern' => '/sms/delivery/status'),
-                array('sms_callback/inbounce_messages', 'pattern' => '/sms/inbounce/messages'),
+                array('sms_callback/delivery_status', 'pattern' => '/sms/delivery/status', 'verb' => 'POST'),
+                array('sms_callback/inbounce_messages', 'pattern' => '/sms/inbounce/messages', 'verb' => 'POST'),
 
                 array('customer_login_logs/index', 'pattern' => 'customers/login-logs'),
                 array('customer_login_logs/<action>', 'pattern' => 'customers/login-logs/<action:(\w+)>/*'),

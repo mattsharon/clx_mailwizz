@@ -22,13 +22,13 @@ class Sms_callbackController extends Controller
 
     public function actionDelivery_Status()
     {
-        $input = file_get_contents("php://input");
-        Yii::log($input, CLogger::LEVEL_ERROR);
+        $type = '123123';
+        Yii::log($type, CLogger::LEVEL_ERROR);
     }
 
     public function actionInbounce_Messages()
     {
-        $str = "inbounce callback";
-        print_r($str); exit;
+        $type = '123123';
+        Yii::log($type, CLogger::LEVEL_ERROR);
     }
 }
