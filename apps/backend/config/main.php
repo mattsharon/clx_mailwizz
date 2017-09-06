@@ -132,8 +132,12 @@ return array(
                 array('customers_mass_emails/index', 'pattern' => 'customers/mass-emails'),
 
                 array('customer_messages/index', 'pattern' => 'customers/messages'),
-                array('customer_messages/<action>', 'pattern' => 'customers/messages/<action:(\w+)>/*'),
+                array('customer_messages/<action>', 'pattern' => 'customers/messages/<actixon:(\w+)>/*'),
                 array('customer_messages/<action>', 'pattern' => 'customers/messages/<action:(\w+)>'),
+
+                array('customer_sms_messages/index', 'pattern' => 'customers/sms/messages'),
+                array('customer_sms_messages/<action>', 'pattern' => 'customers/sms/messages/<action:(\w+)>/*'),
+                array('customer_sms_messages/<action>', 'pattern' => 'customers/sms/messages/<action:(\w+)>'),
 
                 array('customer_login_logs/index', 'pattern' => 'customers/login-logs'),
                 array('customer_login_logs/<action>', 'pattern' => 'customers/login-logs/<action:(\w+)>/*'),
