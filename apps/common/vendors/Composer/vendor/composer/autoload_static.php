@@ -44,6 +44,7 @@ class ComposerStaticInit4c83578660a226fc6038d5c0d0244a95
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'PhpAmqpLib\\' => 11,
         ),
         'G' => 
@@ -59,6 +60,10 @@ class ComposerStaticInit4c83578660a226fc6038d5c0d0244a95
         'D' => 
         array (
             'Dyn\\' => 4,
+        ),
+        'C' => 
+        array (
+            'Clx\\Xms\\' => 8,
         ),
         'A' => 
         array (
@@ -127,6 +132,10 @@ class ComposerStaticInit4c83578660a226fc6038d5c0d0244a95
         array (
             0 => __DIR__ . '/..' . '/react/promise/src',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'PhpAmqpLib\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-amqplib/php-amqplib/PhpAmqpLib',
@@ -150,6 +159,10 @@ class ComposerStaticInit4c83578660a226fc6038d5c0d0244a95
         'Dyn\\' => 
         array (
             0 => __DIR__ . '/..' . '/dyninc/dyn-php/src',
+        ),
+        'Clx\\Xms\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/clxcommunications/sdk-xms/src',
         ),
         'Abraham\\TwitterOAuth\\' => 
         array (

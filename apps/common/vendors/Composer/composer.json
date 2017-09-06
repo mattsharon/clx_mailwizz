@@ -15,6 +15,7 @@
         "mailin-api/mailin-api-php": "^1.0",
         "tipimail/tipimail": "^0.1.57",
         "klaussilveira/simple-shm": "^1.0",
-        "facebook/graph-sdk": "^5.4"
+        "facebook/graph-sdk": "^5.4",
+        "clxcommunications/sdk-xms": "^1.1"
     }
 }

@@ -75,7 +75,7 @@ class DashboardController extends Controller
         // stats
         $timelineItems = $this->getTimelineItems();
         $glanceStats   = $this->getGlanceStats();
-        
+//        print_r("<pre>"); print_r($glanceStats); print_r("</pre>"); exit;
         //
         $this->setData(array(
             'pageMetaTitle'     => $this->data->pageMetaTitle . ' | ' . Yii::t('dashboard', 'Dashboard'),

@@ -1839,5 +1839,94 @@
             "facebook",
             "sdk"
         ]
+    },
+    {
+        "name": "psr/log",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/log.git",
+            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-10-10T12:19:37+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Log\\": "Psr/Log/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for logging libraries",
+        "homepage": "https://github.com/php-fig/log",
+        "keywords": [
+            "log",
+            "psr",
+            "psr-3"
+        ]
+    },
+    {
+        "name": "clxcommunications/sdk-xms",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/clxcommunications/sdk-xms-php.git",
+            "reference": "4546420eed4425434b96e505d74815d27c7d2d99"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/clxcommunications/sdk-xms-php/zipball/4546420eed4425434b96e505d74815d27c7d2d99",
+            "reference": "4546420eed4425434b96e505d74815d27c7d2d99",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.6 || ^7.0",
+            "psr/log": "^1.0"
+        },
+        "require-dev": {
+            "gamez/psr-testlogger": "^1.0",
+            "internations/http-mock": "^0.7",
+            "phpdocumentor/phpdocumentor": "^2.0",
+            "phpunit/phpunit": "^5.5"
+        },
+        "time": "2017-07-12T12:40:46+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Clx\\Xms\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Library for CLX Communications HTTP REST Messaging API",
+        "homepage": "https://github.com/clxcommunications/sdk-xms-php/"
     }
 ]

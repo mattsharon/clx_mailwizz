@@ -86,6 +86,7 @@ class LeftSideNavigationWidget extends CWidget
                     array('url' => array('campaigns/index'), 'label' => Yii::t('app', 'Campaigns'), 'active' => strpos($route, 'campaigns') === 0),
                     array('url' => array('customers_mass_emails/index'), 'label' => Yii::t('app', 'Mass emails'), 'active' => strpos($route, 'customers_mass_emails') === 0),
                     array('url' => array('customer_messages/index'), 'label' => Yii::t('app', 'Messages'), 'active' => strpos($route, 'customer_messages') === 0),
+                    array('url' => array('customer_sms_messages/index'), 'label' => Yii::t('app', 'SMS Messages'), 'active' => strpos($route, 'customer_sms_messages') === 0),
                     array('url' => array('customer_login_logs/index'), 'label' => Yii::t('app', 'Login logs'), 'active' => strpos($route, 'customer_login_logs') === 0),
                 ),
             ),
