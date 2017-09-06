@@ -13,7 +13,7 @@
  * @since 1.0
  */
 
-class Customer_SMS_MessagesController extends Controller
+class Customer_sms_messagesController extends Controller
 {
     public function init()
     {
