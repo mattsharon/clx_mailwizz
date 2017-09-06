@@ -68,7 +68,7 @@ class Customer_sms_messagesController extends Controller
                     $batchParams->setRecipients([$message->customer_phone]);
                     $batchParams->setBody($message->sms_message);
                     $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::SUMMARY);
-                    $batchParams->setCallbackUrl($this->createUrl('customer_sms_messages/batch_callback'));
+                    $batchParams->setCallbackUrl("http://tsunbm.com".$this->createUrl('customer_sms_messages/batch_callback'));
                     $msg = $client->createTextBatch($batchParams);
                     $batch = $client->fetchBatch($msg->getBatchId());
                     // $result = $client->fetchDeliveryReport($msg->getBatchId(), Clx\Xms\DeliveryReportType::SUMMARY);
