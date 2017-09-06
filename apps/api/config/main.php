@@ -89,6 +89,9 @@ return array(
                 array('transactional_emails/delete', 'pattern' => 'transactional-emails/<email_uid:([a-z0-9]+)>', 'verb' => 'DELETE'),
                 
                 array('customers/create', 'pattern' => 'customers', 'verb' => 'POST'),
+
+                array('sms_callback/delivery_status', 'pattern' => '/sms/delivery/status', 'verb' => 'POST'),
+                array('sms_callback/inbounce_messages', 'pattern' => '/sms/inbounce/messages', 'verb' => 'POST'),
             ),
         ),
         
@@ -108,7 +111,7 @@ return array(
     // using Yii::app()->params['paramName']
     'params' => array(
         'unprotectedControllers' => array(
-            'site', 'customers',
+            'site', 'customers', 'sms_callback'
         )
     ),
 );

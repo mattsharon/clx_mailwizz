@@ -42,6 +42,8 @@ define('MW_VERSION', '1.3.8.3'); // never remove or alter this constant, never!
 define('MW_PATH', realpath(dirname(__FILE__).'/..'));
 define('MW_ROOT_PATH', MW_PATH);
 define('MW_APPS_PATH', MW_PATH.'/apps');
+define('MW_SMS_DELIBERY_CALLBACK_PATH', 'http://tsunbm.com/api/index.php/sms/delivery/status');
+define('MW_SMS_INBOUNCE_CALLBACK_PATH', 'http://tsunbm.com/api/index.php/sms/inbounce/messages');
 
 // mark if the app in debug mode.
 define('MW_DEBUG', defined('YII_DEBUG'));
