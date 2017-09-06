@@ -22,60 +22,6 @@ class Customer_sms_messagesController extends Controller
         parent::init();
     }
 
-    /**
-     * Handle the common settings page
-     */
-    // public function actionIndex()
-    // {
-    //     $request = Yii::app()->request;
-    //     $notify  = Yii::app()->notify;
-    //     $model   = new OptionSMSMessages();
-        
-    //     if ($request->isPostRequest) {
-
-    //         $model->unsetAttributes();
-    //         $model->attributes = (array)$request->getPost($model->modelName, array());
-    //         // print_r("<pre>"); print_r($model->attributes); print_r("</pre>"); exit;
-    //         try {
-    //             $client = new Clx\Xms\Client('mattp22', '9a8ad0015b8745839422d0ec81efeab5');
-    //             $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
-    //             $batchParams->setSender('12345');
-    //             $batchParams->setRecipients(['987654321']);
-    //             $batchParams->setBody('Hello, World!');
-    //             $result = $client->createTextBatch($batchParams);
-    //             $notify->addSuccess(Yii::t('app', $result->getBatchId()));
-    //         }
-    //         catch (Exception $ex) {
-    //             $notify->addError(Yii::t('app', $ex->getMessage()));
-    //         }
-    //         // if (!$model->save()) {
-    //         //     $notify->addError(Yii::t('app', 'Your form contains a few errors, please fix them and try again!'));
-    //         // } else {
-    //         //     $notify->addSuccess(Yii::t('app', 'Your form has been successfully saved!'));
-    //         // }
-
-    //         Yii::app()->hooks->doAction('controller_action_save_data', $collection = new CAttributeCollection(array(
-    //             'controller' => $this,
-    //             'success'    => $notify->hasSuccess,
-    //             'model'      => $model,
-    //         )));
-
-    //         if ($collection->success) {
-    //             $this->redirect(array('sms_messages/index'));
-    //         }
-    //     }
-
-    //     $this->setData(array(
-    //         'pageMetaTitle'     => $this->getData('pageMetaTitle') . ' | ' . Yii::t('sms_messages', 'SMS Messages'),
-    //         'pageHeading'       => Yii::t('sms_messages', 'SMS Messages'),
-    //         'pageBreadcrumbs'   => array(
-    //             Yii::t('sms_messages', 'SMS Messages')  => $this->createUrl('sms_messages/index')
-    //         )
-    //     ));
-
-    //     $this->render('index', compact('model'));
-    // }
-
     public function actionIndex()
     {
         $request = Yii::app()->request;
