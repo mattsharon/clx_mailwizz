@@ -147,7 +147,6 @@ class LeftSideNavigationWidget extends CWidget
                 'route'     => null,
                 'items'     => array(
                     array('url' => array('phone_blacklist/index'), 'label' => Yii::t('app', 'Phone blacklist'), 'active' => $route == 'phone_blacklist' || strpos($route, 'phone_blacklist/') === 0),
-                    array('url' => array('phone_blacklist_suggest/index'), 'label' => Yii::t('app', 'Blacklist suggestions'), 'active' => strpos($route, 'phone_blacklist_suggest') === 0),
                 ),
             ),
             'extend' => array(
