@@ -165,10 +165,6 @@ class CustomerSMSMessage extends ActiveRecord
             return false;
         }
 
-        if ($this->isNewRecord) {
-            $this->sms_message_uid = $this->generateUid();
-        }
-
         if (!empty($this->message_translation_params)) {
             $this->message_translation_params = serialize($this->message_translation_params);
         }
@@ -210,21 +206,6 @@ class CustomerSMSMessage extends ActiveRecord
         return $this->findByAttributes(array(
             'sms_message_uid' => $this->sms_message_uid,
         ));
-    }
-
-    /**
-     * @return string
-     */
-	public function generateUid()
-    {
-        $unique = StringHelper::uniqid();
-        $exists = $this->findByUid($unique);
-
-        if (!empty($exists)) {
-            return $this->generateUid();
-        }
-
-        return $unique;
     }
 
     /**

@@ -56,6 +56,7 @@ class Customer_sms_messagesController extends Controller
             $message->attributes = $attributes;
             $message->sms_message    = Yii::app()->ioFilter->purify(Yii::app()->params['POST'][$message->modelName]['sms_message']);
             $message->status = 'Unknown';
+            $message->sms_message_uid = 'error_uid';
 
             if (!$message->save()) {
                 $notify->addError(Yii::t('app', 'Your form has a few errors, please fix them and try again!'));
@@ -70,7 +71,11 @@ class Customer_sms_messagesController extends Controller
                     $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
                     $batchParams->setCallbackUrl(MW_SMS_DELIBERY_CALLBACK_PATH);
                     $msg = $client->createTextBatch($batchParams);
+                    $message->sms_message_uid = $msg->getBatchId();
+                    $message->update();
+                    print_r($msg->getBatchId());
                     $batch = $client->fetchBatch($msg->getBatchId());
+                    $notify->addSuccess(Yii::t('app', "Message Sent!"));
                     // $result = $client->fetchDeliveryReport($msg->getBatchId(), Clx\Xms\DeliveryReportType::SUMMARY);
                     // $status = $result->getStatuses()[0]->getStatus();
 
@@ -82,8 +87,7 @@ class Customer_sms_messagesController extends Controller
                     //     $notify->addSuccess(Yii::t('app', "Message ".$status."!"));
                     // else
                     //     $notify->addError(Yii::t('app', "Message ".$status."."));
-                    // $message->status = $status;
-                    // $message->update();
+                    
                 }
                 catch (Exception $ex) {
                     $notify->addError(Yii::t('app', $ex->getMessage()));

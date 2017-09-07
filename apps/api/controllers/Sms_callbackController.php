@@ -25,17 +25,28 @@ class Sms_callbackController extends Controller
 
     public function actionDelivery_Status()
     {
-        $request = Yii::app()->request->getRawBody();
-        // $arr_status = json_encode($request);
+        $rawbody = Yii::app()->request->getRawBody();
+        $request = json_decode($rawbody, true);
+        $message_uid = $request['batch_id'];
+        $arr_status = $request['statuses'];
+        $status = $arr_status[0]['status'];
+        $recipient = $arr_status[0]['recipients'][0];
+
+        $message = CustomerSMSMessage::model()->find('sms_message_uid=:sms_message_uid', array(':sms_message_uid'=>$message_uid));
+        if (empty($message)) {
+            Yii::log("Callback -- Cannot Find sms_message_uid", CLogger::LEVEL_ERROR);
+        }
+        else{
+            $message->status = $status;
+            $message->update();
+            Yii::log("sms_message_uid: ".$message_uid."  status: ".$status, CLogger::LEVEL_INFO);
+        }
         
-        Yii::log($request, CLogger::LEVEL_ERROR);
     }
 
     public function actionInbounce_Messages()
     {
-        $request = Yii::app()->request;
-        $arr_status = (array)$request->getQuery();
-        $output = implode(', ', array_map( function ($v, $k) { return sprintf("%s='%s'", $k, $v); }, $arr_status, array_keys($arr_status)));
-        Yii::log($output, CLogger::LEVEL_ERROR);
+        $request = Yii::app()->request->getRawBody();
+        Yii::log($request, CLogger::LEVEL_INFO);
     }
 }
