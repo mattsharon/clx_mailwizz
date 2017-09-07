@@ -63,7 +63,7 @@ class Customer_sms_messagesController extends Controller
             } else {
                 // $notify->addSuccess(Yii::t('app', 'Your form has been successfully saved!'));
                 try {
-                    $client = new Clx\Xms\Client('eeeik12', 'a8622756b24841638d3cff076e070516');
+                    $client = new Clx\Xms\Client('testj72', '2b820f53c26f4559a57e18f61299b380');
                     $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
                     $batchParams->setSender('123456789');
                     $batchParams->setRecipients([$message->customer_phone]);

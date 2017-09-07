@@ -39,7 +39,7 @@ class Sms_callbackController extends Controller
         else{
             $message->status = $status;
             $message->update();
-            Yii::log("sms_message_uid: ".$message_uid."  status: ".$status, CLogger::LEVEL_INFO);
+            Yii::log("sms_message_uid: ".$message_uid."  status: ".$status, CLogger::LEVEL_ERROR);
         }
         
     }
@@ -47,6 +47,6 @@ class Sms_callbackController extends Controller
     public function actionInbounce_Messages()
     {
         $request = Yii::app()->request->getRawBody();
-        Yii::log($request, CLogger::LEVEL_INFO);
+        Yii::log($request, CLogger::LEVEL_ERROR);
     }
 }
