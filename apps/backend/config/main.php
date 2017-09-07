@@ -131,7 +131,7 @@ return array(
                 array('customers_mass_emails/index', 'pattern' => 'customers/mass-emails'),
 
                 array('customer_messages/index', 'pattern' => 'customers/messages'),
-                array('customer_messages/<action>', 'pattern' => 'customers/messages/<actixon:(\w+)>/*'),
+                array('customer_messages/<action>', 'pattern' => 'customers/messages/<action:(\w+)>/*'),
                 array('customer_messages/<action>', 'pattern' => 'customers/messages/<action:(\w+)>'),
 
                 array('customer_sms_messages/index', 'pattern' => 'customers/sms/messages'),

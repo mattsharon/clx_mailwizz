@@ -34,7 +34,7 @@ if ($viewCollection->renderContent) { ?>
                 </h3>
             </div>
             <div class="pull-right">
-                <?php echo HtmlHelper::accessLink(IconHelper::make('back') . Yii::t('app', 'Back'), array('customer_sms_messages/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Back')));?>
+                <?php echo HtmlHelper::accessLink(IconHelper::make('back') . Yii::t('app', 'Back'), array('sms_templates/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Back')));?>
             </div>
             <div class="clearfix"><!-- --></div>
         </div>
@@ -42,24 +42,24 @@ if ($viewCollection->renderContent) { ?>
             <div class="table-responsive">
             <?php
             $this->widget('zii.widgets.CDetailView', array(
-                'data'      => $message,
+                'data'      => $template,
                 'cssFile'   => false,
                 'htmlOptions' => array(
                     'class' => 'table table-striped table-bordered table-hover table-condensed'
                 ),
                 'attributes' => array(
                     array(
-                        'label' => $message->getAttributeLabel('customer_phone'),
-                        'value' => $message->customer_phone,
+                        'label' => $template->getAttributeLabel('type'),
+                        'value' => $template->type,
                     ),
                     array(
-                        'label' => $message->getAttributeLabel('sms_message'),
-                        'value' => $message->sms_message,
+                        'label' => $template->getAttributeLabel('content'),
+                        'value' => $template->content,
                         'type'  => 'raw',
                     ),
                     array(
-                        'label' => $message->getAttributeLabel('created_at'),
-                        'value' => $message->dateAdded,
+                        'label' => $template->getAttributeLabel('Date Added'),
+                        'value' => $template->dateAdded,
                     ),
                 ),
             ));

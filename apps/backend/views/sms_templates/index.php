@@ -34,8 +34,8 @@ if ($viewCollection->renderContent) { ?>
                 </h3>
             </div>
             <div class="pull-right">
-                <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('customer_sms_messages/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
-                <?php echo HtmlHelper::accessLink(IconHelper::make('refresh') . Yii::t('app', 'Refresh'), array('customer_sms_messages/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Refresh')));?>
+                <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('sms_templates/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
+                <?php echo HtmlHelper::accessLink(IconHelper::make('refresh') . Yii::t('app', 'Refresh'), array('sms_templates/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Refresh')));?>
             </div>
             <div class="clearfix"><!-- --></div>
         </div>
@@ -59,9 +59,9 @@ if ($viewCollection->renderContent) { ?>
             if ($collection->renderGrid) {
                 $this->widget('zii.widgets.grid.CGridView', $hooks->applyFilters('grid_view_properties', array(
                     'ajaxUrl'           => $this->createUrl($this->route),
-                    'id'                => $message->modelName.'-grid',
-                    'dataProvider'      => $message->search(),
-                    'filter'            => $message,
+                    'id'                => $template->modelName.'-grid',
+                    'dataProvider'      => $template->search(),
+                    'filter'            => $template,
                     'filterPosition'    => 'body',
                     'filterCssClass'    => 'grid-filter-cell',
                     'itemsCssClass'     => 'table table-hover',
@@ -77,22 +77,12 @@ if ($viewCollection->renderContent) { ?>
                     ),
                     'columns' => $hooks->applyFilters('grid_view_columns', array(
                         array(
-                            'name'  => 'customer_id',
-                            'value' => 'HtmlHelper::accessLink($data->customer->fullName, array("customers/update", "id" => $data->customer_id))',
-                            'type'  => 'raw',
+                            'name'  => 'type',
+                            'value' => '$data->getType(30)',
                         ),
                         array(
-                            'name'  => 'customer_phone',
-                            'value' => '$data->getPhoneNumber($data->customer_id, 30)',
-                        ),
-                        array(
-                            'name'  => 'sms_message',
-                            'value' => '$data->getShortMessage(100)',
-                        ),
-                        array(
-                            'name'  => 'status',
-                            'value' => 'Yii::t("sms_messages", ucfirst($data->status))',
-                            'filter'=> $message->getStatusesList(),
+                            'name'  => 'content',
+                            'value' => '$data->getShortContent(45)',
                         ),
                         array(
                             'name'  => 'created_at',
@@ -107,28 +97,28 @@ if ($viewCollection->renderContent) { ?>
                         array(
                             'class'     => 'CButtonColumn',
                             'header'    => Yii::t('app', 'Options'),
-                            'footer'    => $message->paginationOptions->getGridFooterPagination(),
+                            'footer'    => $template->paginationOptions->getGridFooterPagination(),
                             'buttons'   => array(
                                 'view' => array(
                                     'label'    => IconHelper::make('view'),
-                                    'url'      => 'Yii::app()->createUrl("customer_sms_messages/view", array("id" => $data->sms_message_id))',
+                                    'url'      => 'Yii::app()->createUrl("sms_templates/view", array("id" => $data->sms_template_id))',
                                     'imageUrl' => null,
                                     'options'  => array('title' => Yii::t('lists', 'View'), 'class' => 'btn btn-primary btn-flat'),
-                                    'visible'  => 'AccessHelper::hasRouteAccess("customer_sms_messages/view")',
+                                    'visible'  => 'AccessHelper::hasRouteAccess("sms_templates/view")',
                                 ),
                                 'update' => array(
                                     'label'     => IconHelper::make('update'),
-                                    'url'       => 'Yii::app()->createUrl("customer_sms_messages/update", array("id" => $data->sms_message_id))',
+                                    'url'       => 'Yii::app()->createUrl("sms_templates/update", array("id" => $data->sms_template_id))',
                                     'imageUrl'  => null,
                                     'options'   => array('title' => Yii::t('app', 'Update'), 'class' => 'btn btn-primary btn-flat'),
-                                    'visible'   => 'AccessHelper::hasRouteAccess("customer_sms_messages/update")',
+                                    'visible'   => 'AccessHelper::hasRouteAccess("sms_templates/update")',
                                 ),
                                 'delete' => array(
                                     'label'     => IconHelper::make('delete'),
-                                    'url'       => 'Yii::app()->createUrl("customer_sms_messages/delete", array("id" => $data->sms_message_id))',
+                                    'url'       => 'Yii::app()->createUrl("sms_templates/delete", array("id" => $data->sms_template_id))',
                                     'imageUrl'  => null,
                                     'options'   => array('title' => Yii::t('app', 'Delete'), 'class' => 'btn btn-danger btn-flat delete'),
-                                    'visible'   => 'AccessHelper::hasRouteAccess("customer_sms_messages/delete")',
+                                    'visible'   => 'AccessHelper::hasRouteAccess("sms_templates/delete")',
                                 ),
                             ),
                             'headerHtmlOptions' => array('style' => 'text-align: right'),

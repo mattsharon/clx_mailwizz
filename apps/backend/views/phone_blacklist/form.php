@@ -8,7 +8,7 @@
  * @link http://www.mailwizz.com/
  * @copyright 2013-2016 MailWizz EMA (http://www.mailwizz.com)
  * @license http://www.mailwizz.com/license/
- * @since 1.3.4.8
+ * @since 1.0
  */
 
 /**
@@ -45,7 +45,16 @@ if ($viewCollection->renderContent) {
         ?>
         <div class="box box-primary borderless">
             <div class="box-header">
-                <h3 class="box-title"><?php echo Yii::t('clx_smsmessages', 'SMS Messages')?></h3>
+                <div class="pull-left">
+                    <h3 class="box-title"><?php echo IconHelper::make('glyphicon-ban-circle') .  $pageHeading;?></h3>
+                </div>
+                <div class="pull-right">
+                    <?php if (!$blacklist->isNewRecord) { ?>
+                    <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('phone_blacklist/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
+                    <?php } ?>
+                    <?php echo HtmlHelper::accessLink(IconHelper::make('cancel') . Yii::t('app', 'Cancel'), array('phone_blacklist/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Cancel')));?>
+                </div>
+                <div class="clearfix"><!-- --></div>
             </div>
             <div class="box-body">
                 <?php 
@@ -61,31 +70,24 @@ if ($viewCollection->renderContent) {
                 )));
                 ?>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="form-group">
-                            <?php echo $form->labelEx($model, 'sender');?>
-                            <?php echo $form->textField($model, 'sender', $model->getHtmlOptions('sender')); ?>
-                            <?php echo $form->error($model, 'sender');?>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <?php echo $form->labelEx($model, 'recipient');?>
-                            <?php echo $form->textField($model, 'recipient', $model->getHtmlOptions('recipient')); ?>
-                            <?php echo $form->error($model, 'recipient');?>
+                            <?php echo $form->labelEx($blacklist, 'phone');?>
+                            <?php echo $form->textField($blacklist, 'phone', $blacklist->getHtmlOptions('phone')); ?>
+                            <?php echo $form->error($blacklist, 'phone');?>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <?php echo $form->labelEx($model, 'message_body');?>
-                            <?php echo $form->textArea($model, 'message_body', $model->getHtmlOptions('message_body', array('rows' => 5))); ?>
-                            <?php echo $form->error($model, 'message_body');?>
+                            <?php echo $form->labelEx($blacklist, 'reason');?>
+                            <?php echo $form->textArea($blacklist, 'reason', $blacklist->getHtmlOptions('reason', array('rows' => 10))); ?>
+                            <?php echo $form->error($blacklist, 'reason');?>
                         </div>
                     </div>
                 </div>
+                <div class="clearfix"><!-- --></div>
                 <?php 
                 /**
                  * This hook gives a chance to append content after the active form fields.
@@ -102,7 +104,7 @@ if ($viewCollection->renderContent) {
             </div>
             <div class="box-footer">
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-primary btn-flat"><?php echo IconHelper::make('save') . Yii::t('app', 'Send');?></button>
+                    <button type="submit" class="btn btn-primary btn-flat"><?php echo IconHelper::make('save') . Yii::t('app', 'Save changes');?></button>
                 </div>
                 <div class="clearfix"><!-- --></div>
             </div>
@@ -120,6 +122,7 @@ if ($viewCollection->renderContent) {
         'controller'      => $this,
         'renderedForm'    => $collection->renderForm,
     )));
+
 }
 /**
  * This hook gives a chance to append content after the view file default content.

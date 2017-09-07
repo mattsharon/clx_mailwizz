@@ -123,6 +123,12 @@ class LeftSideNavigationWidget extends CWidget
                 'active'    => 'email_templates_gallery',
                 'route'     => array('email_templates_gallery/index'),
             ),
+            'sms-templates' => array(
+                'name'      => Yii::t('app', 'Sms Templates'),
+                'icon'      => 'glyphicon-comment',
+                'active'    => 'sms_templates',
+                'route'     => array('sms_templates/index'),
+            ),
             'blacklist' => array(
                 'name'      => Yii::t('app', 'Email blacklist'),
                 'icon'      => 'glyphicon-ban-circle',
@@ -132,6 +138,16 @@ class LeftSideNavigationWidget extends CWidget
                     array('url' => array('email_blacklist/index'), 'label' => Yii::t('app', 'Email blacklist'), 'active' => $route == 'email_blacklist' || strpos($route, 'email_blacklist/') === 0),
                     array('url' => array('email_blacklist_monitors/index'), 'label' => Yii::t('app', 'Blacklist monitors'), 'active' => strpos($route, 'email_blacklist_monitors') === 0),
                     array('url' => array('email_blacklist_suggest/index'), 'label' => Yii::t('app', 'Blacklist suggestions'), 'active' => strpos($route, 'email_blacklist_suggest') === 0),
+                ),
+            ),
+            'sms-phone-blacklist' => array(
+                'name'      => Yii::t('app', 'Phone blacklist'),
+                'icon'      => 'glyphicon-ban-circle',
+                'active'    => 'phone_blacklist',
+                'route'     => null,
+                'items'     => array(
+                    array('url' => array('phone_blacklist/index'), 'label' => Yii::t('app', 'Phone blacklist'), 'active' => $route == 'phone_blacklist' || strpos($route, 'phone_blacklist/') === 0),
+                    array('url' => array('phone_blacklist_suggest/index'), 'label' => Yii::t('app', 'Blacklist suggestions'), 'active' => strpos($route, 'phone_blacklist_suggest') === 0),
                 ),
             ),
             'extend' => array(

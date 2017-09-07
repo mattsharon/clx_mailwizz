@@ -160,8 +160,8 @@ class Customer_sms_messagesController extends Controller
         $message->fieldDecorator->onHtmlOptionsSetup = array($this, '_setEditorOptions');
 
         $this->setData(array(
-            'pageMetaTitle'   => $this->data->pageMetaTitle . ' | '. Yii::t('messages', 'Update message'),
-            'pageHeading'     => Yii::t('messages', 'Update message'),
+            'pageMetaTitle'   => $this->data->pageMetaTitle . ' | '. Yii::t('sms_messages', 'Update message'),
+            'pageHeading'     => Yii::t('sms_messages', 'Update message'),
             'pageBreadcrumbs' => array(
                 Yii::t('customers', 'Customers') => $this->createUrl('customers/index'),
                 Yii::t('sms_messages', 'SMS Messages')   => $this->createUrl('customer_sms_messages/index'),
@@ -184,8 +184,8 @@ class Customer_sms_messagesController extends Controller
         }
 
         $this->setData(array(
-            'pageMetaTitle'   => $this->data->pageMetaTitle . ' | '. Yii::t('messages', 'View message'),
-            'pageHeading'     => Yii::t('messages', 'View message'),
+            'pageMetaTitle'   => $this->data->pageMetaTitle . ' | '. Yii::t('sms_messages', 'View message'),
+            'pageHeading'     => Yii::t('sms_messages', 'View message'),
             'pageBreadcrumbs' => array(
                 Yii::t('customers', 'Customers') => $this->createUrl('customers/index'),
                 Yii::t('sms_messages', 'SMS Messages')   => $this->createUrl('customer_sms_messages/index'),

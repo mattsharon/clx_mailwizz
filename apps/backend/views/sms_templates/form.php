@@ -49,10 +49,10 @@ if ($viewCollection->renderContent) {
                     <h3 class="box-title"><?php echo IconHelper::make('glyphicon-comment') .  $pageHeading;?></h3>
                 </div>
                 <div class="pull-right">
-                    <?php if (!$message->isNewRecord) { ?>
-                    <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('customer_sms_messages/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
+                    <?php if (!$template->isNewRecord) { ?>
+                    <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('sms_templates/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
                     <?php } ?>
-                    <?php echo HtmlHelper::accessLink(IconHelper::make('cancel') . Yii::t('app', 'Cancel'), array('customer_sms_messages/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Cancel')));?>
+                    <?php echo HtmlHelper::accessLink(IconHelper::make('cancel') . Yii::t('app', 'Cancel'), array('sms_templates/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Cancel')));?>
                 </div>
                 <div class="clearfix"><!-- --></div>
             </div>
@@ -70,42 +70,12 @@ if ($viewCollection->renderContent) {
                 )));
                 ?>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <?php echo $form->labelEx($message, 'customer_id');?>
-                            <?php echo $form->hiddenField($message, 'customer_id', $message->getHtmlOptions('customer_id')); ?>
-                            <?php
-                            $this->widget('zii.widgets.jui.CJuiAutoComplete',array(
-                                'name'          => 'customer',
-                                'value'         => !empty($message->customer) ? ($message->customer->getFullName() ? $message->customer->getFullName() : $message->customer->email) : null,
-                                'source'        => $this->createUrl('customers/autocomplete'),
-                                'cssFile'       => false,
-                                'options'       => array(
-                                    'minLength' => '2',
-                                    'select'    => 'js:function(event, ui) {
-                                $("#'.CHtml::activeId($message, 'customer_id').'").val(ui.item.customer_id);
-                            }',
-                                    'search'    => 'js:function(event, ui) {
-                                $("#'.CHtml::activeId($message, 'customer_id').'").val("");
-                            }',
-                                    'change'    => 'js:function(event, ui) {
-                                if (!ui.item) {
-                                    $("#'.CHtml::activeId($message, 'customer_id').'").val("");
-                                }
-                            }',
-                                ),
-                                'htmlOptions'   => $message->getHtmlOptions('customer_id'),
-                            ));
-                            ?>
-                            <?php echo $form->error($message, 'customer_id');?>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="form-group">
-                            <?php echo $form->labelEx($message, 'customer_phone');?>
-                            <?php echo $form->textField($message, 'customer_phone', $message->getHtmlOptions('customer_phone')); ?>
-                            <?php echo $form->error($message, 'customer_phone');?>
+                            <?php echo $form->labelEx($template, 'type');?>
+                            <?php echo $form->textField($template, 'type', $template->getHtmlOptions('type')); ?>
+                            <?php echo $form->error($template, 'type');?>
                         </div>
                     </div>
 
@@ -113,9 +83,9 @@ if ($viewCollection->renderContent) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <?php echo $form->labelEx($message, 'sms_message');?>
-                            <?php echo $form->textArea($message, 'sms_message', $message->getHtmlOptions('sms_message', array('rows' => 10))); ?>
-                            <?php echo $form->error($message, 'sms_message');?>
+                            <?php echo $form->labelEx($template, 'content');?>
+                            <?php echo $form->textArea($template, 'content', $template->getHtmlOptions('content', array('rows' => 10))); ?>
+                            <?php echo $form->error($template, 'content');?>
                         </div>
                     </div>
                 </div>
@@ -135,7 +105,7 @@ if ($viewCollection->renderContent) {
             </div>
             <div class="box-footer">
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-primary btn-flat"><?php echo IconHelper::make('info') . Yii::t('app', 'Send');?></button>
+                    <button type="submit" class="btn btn-primary btn-flat"><?php echo IconHelper::make('save') . Yii::t('app', 'Save');?></button>
                 </div>
                 <div class="clearfix"><!-- --></div>
             </div>
