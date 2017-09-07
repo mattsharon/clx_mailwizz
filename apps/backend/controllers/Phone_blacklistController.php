@@ -48,7 +48,7 @@ class Phone_blacklistController extends Controller
     {
         $notify    = Yii::app()->notify;
         $request   = Yii::app()->request;
-        $blacklist = new PhoneBlackList('search');
+        $blacklist = new PhoneBlacklist('search');
 
         $blacklist->unsetAttributes();
         $blacklist->attributes = (array)$request->getQuery($blacklist->modelName, array());
