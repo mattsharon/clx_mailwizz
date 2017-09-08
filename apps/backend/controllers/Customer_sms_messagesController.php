@@ -65,7 +65,7 @@ class Customer_sms_messagesController extends Controller
                 try {
                     $client = new Clx\Xms\Client('testj72', '2b820f53c26f4559a57e18f61299b380');
                     $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
-                    $batchParams->setSender('123456789');
+                    $batchParams->setSender('Tsunbm');
                     $batchParams->setRecipients([$message->customer_phone]);
                     $batchParams->setBody($message->sms_message);
                     $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
