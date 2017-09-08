@@ -58,6 +58,10 @@ if ($viewCollection->renderContent) { ?>
                         'type'  => 'raw',
                     ),
                     array(
+                        'label' => $message->getAttributeLabel('status'),
+                        'value' => $message->status,
+                    ),
+                    array(
                         'label' => $message->getAttributeLabel('created_at'),
                         'value' => $message->dateAdded,
                     ),
