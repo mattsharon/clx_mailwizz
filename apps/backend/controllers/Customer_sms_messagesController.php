@@ -65,7 +65,7 @@ class Customer_sms_messagesController extends Controller
                 try {
                     $client = new Clx\Xms\Client('saberlinkl1', '5841eb6a74e049d29b9b609ba97cca54');
                     $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
-                    $batchParams->setSender('Tsunbm');
+                    $batchParams->setSender('25720');
                     $batchParams->setRecipients([$message->customer_phone]);
                     $batchParams->setBody($message->sms_message);
                     $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
@@ -73,7 +73,6 @@ class Customer_sms_messagesController extends Controller
                     $msg = $client->createTextBatch($batchParams);
                     $message->sms_message_uid = $msg->getBatchId();
                     $message->update();
-                    print_r($msg->getBatchId());
                     $batch = $client->fetchBatch($msg->getBatchId());
                     $notify->addSuccess(Yii::t('app', "Message Sent!"));
                     // $result = $client->fetchDeliveryReport($msg->getBatchId(), Clx\Xms\DeliveryReportType::SUMMARY);
