@@ -17,7 +17,7 @@ class Customer_sms_messagesController extends Controller
 {
     public function init()
     {
-        // $this->getData('pageScripts')->add(array('src' => AssetsUrl::js('settings.js')));
+        $this->getData('pageScripts')->add(array('src' => AssetsUrl::js('customer-sms-messages.js')));
         $this->onBeforeAction = array($this, '_registerJuiBs');
         parent::init();
     }
@@ -226,6 +226,30 @@ class Customer_sms_messagesController extends Controller
 
         if ($collection->redirect) {
             $this->redirect($collection->redirect);
+        }
+    }
+
+    public function actionDelete_all()
+    {
+        $criteria = new CDbCriteria();
+        $criteria->select = 'sms_message_id';
+        $criteria->limit  = 500;
+
+        $models = CustomerSMSMessage::model()->findAll($criteria);
+
+        while (!empty($models)) {
+            foreach ($models as $model) {
+                $model->delete();
+            }
+            $models = CustomerSMSMessage::model()->findAll($criteria);
+        }
+
+        $request = Yii::app()->request;
+        $notify  = Yii::app()->notify;
+
+        if (!$request->getQuery('ajax')) {
+            $notify->addSuccess(Yii::t('app', 'Your items have been successfully deleted!'));
+            $this->redirect($request->getPost('returnUrl', array('customer_sms_messages/index')));
         }
     }
 

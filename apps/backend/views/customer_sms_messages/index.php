@@ -34,6 +34,7 @@ if ($viewCollection->renderContent) { ?>
                 </h3>
             </div>
             <div class="pull-right">
+                <?php echo HtmlHelper::accessLink(IconHelper::make('delete') . Yii::t('app', 'Remove all'), array('customer_sms_messages/delete_all'), array('class' => 'btn btn-danger btn-flat delete-all', 'title' => Yii::t('app', 'Remove all'), 'data-message' => Yii::t('dashboard', 'Are you sure you want to remove all sms messages?')));?>
                 <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('customer_sms_messages/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
                 <?php echo HtmlHelper::accessLink(IconHelper::make('refresh') . Yii::t('app', 'Refresh'), array('customer_sms_messages/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Refresh')));?>
             </div>
@@ -121,7 +122,7 @@ if ($viewCollection->renderContent) { ?>
                                     'url'       => 'Yii::app()->createUrl("customer_sms_messages/update", array("id" => $data->sms_message_id))',
                                     'imageUrl'  => null,
                                     'options'   => array('title' => Yii::t('app', 'Update'), 'class' => 'btn btn-primary btn-flat'),
-                                    'visible'   => 'AccessHelper::hasRouteAccess("customer_sms_messages/update")',
+                                    'visible'   => false,
                                 ),
                                 'delete' => array(
                                     'label'     => IconHelper::make('delete'),
