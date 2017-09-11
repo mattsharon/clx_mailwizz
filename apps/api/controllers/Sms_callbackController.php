@@ -65,21 +65,29 @@ class Sms_callbackController extends Controller
                     Yii::log("inbound: Cannot find help sms template", CLogger::LEVEL_ERROR);
                 }
                 else{
-                    $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
-                    $batchParams->setSender('25720');
-                    $batchParams->setRecipients(["447397077911"]);
-                    $batchParams->setBody($template->content);
-                    $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
-                    $msg = $client->createTextBatch($batchParams);
-                    $batch = $client->fetchBatch($msg->getBatchId());
-                    Yii::log("inbound: message id is ".$msg->getBatchId(), CLogger::LEVEL_ERROR);
+                    try{
+                        $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
+                        $batchParams->setSender('25720');
+                        $batchParams->setRecipients(["447397077911"]);
+                        $batchParams->setBody($template->content);
+                        $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
+                        $msg = $client->createTextBatch($batchParams);
+                        $batch = $client->fetchBatch($msg->getBatchId());
+                        Yii::log("inbound: message id is ".$msg->getBatchId(), CLogger::LEVEL_ERROR);
+                    }catch(Exception $ex){
+                        Yii::log("inbound: error->".$ex->getMessage(), CLogger::LEVEL_ERROR);
+                    }
                 }
             }
             else if($body == 'stop'){
                 $blacklist  = new PhoneBlacklist();
                 $blacklist->phone = $request['from'];
                 $blacklist->reason = $body;
-                $blacklist->save();
+                if (!$blacklist->save()) {
+                    Yii::log("blacklist: error save ".$blacklist->phone, CLogger::LEVEL_ERROR);
+                } else {
+                    Yii::log("blacklist: succss save ".$blacklist->phone, CLogger::LEVEL_ERROR);
+                }
             }
             else{
                 $template = SmsTemplate::model()->find('type=:type', array(':type'=>'unknown'));
@@ -87,14 +95,18 @@ class Sms_callbackController extends Controller
                     Yii::log("inbound: Cannot find unkown sms template", CLogger::LEVEL_ERROR);
                 }
                 else{
-                    $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
-                    $batchParams->setSender('25720');
-                    $batchParams->setRecipients(["447397077911"]);
-                    $batchParams->setBody($template->content);
-                    $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
-                    $msg = $client->createTextBatch($batchParams);
-                    $batch = $client->fetchBatch($msg->getBatchId());
-                    Yii::log("inbound: message id is ".$msg->getBatchId(), CLogger::LEVEL_ERROR);
+                    try{
+                        $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
+                        $batchParams->setSender('25720');
+                        $batchParams->setRecipients(["447397077911"]);
+                        $batchParams->setBody($template->content);
+                        $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
+                        $msg = $client->createTextBatch($batchParams);
+                        $batch = $client->fetchBatch($msg->getBatchId());
+                        Yii::log("inbound: message id is ".$msg->getBatchId(), CLogger::LEVEL_ERROR);
+                    }catch(Exception $ex){
+                        Yii::log("inbound: error->".$ex->getMessage(), CLogger::LEVEL_ERROR);
+                    }
                 }
             }
         }
