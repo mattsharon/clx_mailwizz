@@ -111,7 +111,7 @@ class Sms_callbackController extends Controller
             }
         }
         else{
-
+            Yii::log("inbound: unkown", CLogger::LEVEL_ERROR);
         }
         
     }
