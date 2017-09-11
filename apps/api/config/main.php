@@ -91,7 +91,7 @@ return array(
                 array('customers/create', 'pattern' => 'customers', 'verb' => 'POST'),
 
                 array('sms_callback/delivery_status', 'pattern' => '/sms/delivery/status', 'verb' => 'POST'),
-                array('sms_callback/inbounce_messages', 'pattern' => '/sms/inbounce/messages', 'verb' => 'POST'),
+                array('sms_callback/inbound_messages', 'pattern' => '/sms/inbound/messages', 'verb' => 'POST'),
             ),
         ),
         

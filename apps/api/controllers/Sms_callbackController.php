@@ -26,7 +26,7 @@ class Sms_callbackController extends Controller
     public function actionDelivery_Status()
     {
         $rawbody = Yii::app()->request->getRawBody();
-        Yii::log($rawbody, CLogger::LEVEL_ERROR);
+        Yii::log("report: ".$rawbody, CLogger::LEVEL_ERROR);    
         $request = json_decode($rawbody, true);
         $message_uid = $request['batch_id'];
         $arr_status = $request['statuses'];
@@ -45,9 +45,9 @@ class Sms_callbackController extends Controller
         
     }
 
-    public function actionInbounce_Messages()
+    public function actionInbound_Messages()
     {
         $request = Yii::app()->request->getRawBody();
-        Yii::log($request, CLogger::LEVEL_ERROR);
+        Yii::log("inbound: ".$request, CLogger::LEVEL_ERROR);
     }
 }
