@@ -59,6 +59,7 @@ class Customer_sms_messagesController extends Controller
             if (!$message->validate()) {
                 $notify->addError(Yii::t('app', 'Your form has a few errors, please fix them and try again!'));
             } else {
+                $message->customer_phone = $string = str_replace(' ', '', $message->customer_phone);
                 $arr_phone=explode(",",$message->customer_phone);
                 try {
                     $client = new Clx\Xms\Client('saberlinkl1', '5841eb6a74e049d29b9b609ba97cca54');
