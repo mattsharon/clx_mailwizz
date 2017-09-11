@@ -27,7 +27,6 @@ class Sms_templatesController extends Controller
 
         $template->unsetAttributes();
         $template->attributes = (array)$request->getQuery($template->modelName, array());
-
         $this->setData(array(
             'pageMetaTitle'   => $this->data->pageMetaTitle . ' | '. Yii::t('sms_templates', 'View SMS Templates'),
             'pageHeading'     => Yii::t('sms_templates', 'View SMS Templates'),
@@ -51,6 +50,7 @@ class Sms_templatesController extends Controller
 
         if ($request->isPostRequest && ($attributes = (array)$request->getPost($template->modelName, array()))) {
             $template->attributes = $attributes;
+            $template->type = strtolower($template->type);
             $template->content    = Yii::app()->ioFilter->purify(Yii::app()->params['POST'][$template->modelName]['content']);
 
             if (!$template->save()) {
@@ -97,11 +97,12 @@ class Sms_templatesController extends Controller
 
         $request = Yii::app()->request;
         $notify  = Yii::app()->notify;
+        $template->type = strtoupper($template->type);
 
         if ($request->isPostRequest && ($attributes = (array)$request->getPost($template->modelName, array()))) {
             $template->attributes = $attributes;
             $template->content    = Yii::app()->ioFilter->purify(Yii::app()->params['POST'][$template->modelName]['content']);
-
+            $template->type = strtolower($template->type);
             if (!$template->save()) {
                 $notify->addError(Yii::t('app', 'Your form has a few errors, please fix them and try again!'));
             } else {
@@ -143,6 +144,7 @@ class Sms_templatesController extends Controller
         if (empty($template)) {
             throw new CHttpException(404, Yii::t('app', 'The requested page does not exist.'));
         }
+        $template->type = strtoupper($template->type);
 
         $this->setData(array(
             'pageMetaTitle'   => $this->data->pageMetaTitle . ' | '. Yii::t('sms_templates', 'View template'),

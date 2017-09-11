@@ -59,7 +59,7 @@ class CustomerSMSMessage extends ActiveRecord
 			array('customer_id, sms_message, customer_phone', 'required'),
 			array('customer_id', 'exist', 'className' => 'Customer'),
             array('customer_phone', 'length', 'min' => 8),
-            array('customer_phone', 'numerical', 'integerOnly' => true),
+            // array('customer_phone', 'numerical', 'integerOnly' => true),
 			array('sms_message', 'length', 'min' => 1, 'max' => 1600),
 			// array('status', 'in', 'range' => array_keys($this->getStatusesList())),
 

@@ -78,7 +78,7 @@ if ($viewCollection->renderContent) { ?>
                     'columns' => $hooks->applyFilters('grid_view_columns', array(
                         array(
                             'name'  => 'type',
-                            'value' => '$data->getType(30)',
+                            'value' => 'strtoupper($data->getType(30))',
                         ),
                         array(
                             'name'  => 'content',
