@@ -70,7 +70,7 @@ if ($viewCollection->renderContent) {
                 )));
                 ?>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <div class="form-group">
                             <?php echo $form->labelEx($message, 'customer_id');?>
                             <?php echo $form->hiddenField($message, 'customer_id', $message->getHtmlOptions('customer_id')); ?>
@@ -99,9 +99,9 @@ if ($viewCollection->renderContent) {
                             ?>
                             <?php echo $form->error($message, 'customer_id');?>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <?php echo $form->labelEx($message, 'customer_phone');?>
                             <?php echo $form->textField($message, 'customer_phone', $message->getHtmlOptions('customer_phone')); ?>

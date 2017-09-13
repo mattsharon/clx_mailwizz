@@ -77,11 +77,11 @@ if ($viewCollection->renderContent) { ?>
                         'htmlOptions'   => array('class' => 'pagination')
                     ),
                     'columns' => $hooks->applyFilters('grid_view_columns', array(
-                        array(
-                            'name'  => 'customer_id',
-                            'value' => 'HtmlHelper::accessLink($data->customer->fullName, array("customers/update", "id" => $data->customer_id))',
-                            'type'  => 'raw',
-                        ),
+                        // array(
+                        //     'name'  => 'customer_id',
+                        //     'value' => 'HtmlHelper::accessLink($data->customer->fullName, array("customers/update", "id" => $data->customer_id))',
+                        //     'type'  => 'raw',
+                        // ),
                         array(
                             'name'  => 'customer_phone',
                             'value' => '$data->getPhoneNumber($data->customer_id, 30)',

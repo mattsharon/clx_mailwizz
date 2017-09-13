@@ -93,13 +93,11 @@ class Customer_sms_messagesController extends Controller
                     //     $notify->addSuccess(Yii::t('app', "Message ".$status."!"));
                     // else
                     //     $notify->addError(Yii::t('app', "Message ".$status."."));
-                    
                 }
                 catch (Exception $ex) {
                     $notify->addError(Yii::t('app', $ex->getMessage()));
                 }
             }
-
             Yii::app()->hooks->doAction('controller_action_save_data', $collection = new CAttributeCollection(array(
                 'controller'=> $this,
                 'success'   => $notify->hasSuccess,
@@ -199,7 +197,7 @@ class Customer_sms_messagesController extends Controller
 
         $this->render('view', compact('message'));
     }
-
+ 
     /**
      * Delete existing customer message
      */
@@ -256,7 +254,7 @@ class Customer_sms_messagesController extends Controller
             $this->redirect($request->getPost('returnUrl', array('customer_sms_messages/index')));
         }
     }
-
+        
     /**
      * Callback method to set the editor options for email footer in campaigns
      */

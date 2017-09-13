@@ -56,15 +56,15 @@ class CustomerSMSMessage extends ActiveRecord
 	public function rules()
 	{
 		$rules = array(
-			array('customer_id, sms_message, customer_phone', 'required'),
-			array('customer_id', 'exist', 'className' => 'Customer'),
-            array('customer_phone', 'length', 'min' => 8),
+			// array('customer_id, sms_message, customer_phone', 'required'),
+			// array('customer_id', 'exist', 'className' => 'Customer'),
+            array('customer_phone', 'length', 'min' => 5),
             // array('customer_phone', 'numerical', 'integerOnly' => true),
 			array('sms_message', 'length', 'min' => 1, 'max' => 1600),
 			// array('status', 'in', 'range' => array_keys($this->getStatusesList())),
 
 			// The following rule is used by search().
-			array('customer_id, customer_phone, sms_message, status', 'safe', 'on'=>'search'),
+			array('customer_phone, sms_message, status', 'safe', 'on'=>'search'),
 		);
 
 		return CMap::mergeArray($rules, parent::rules());
@@ -73,13 +73,13 @@ class CustomerSMSMessage extends ActiveRecord
 	/**
 	 * @return array relational rules.
 	 */
-	public function relations()
-	{
-		$relations = array(
-			'customer' => array(self::BELONGS_TO, 'Customer', 'customer_id'),
-		);
-		return CMap::mergeArray($relations, parent::relations());
-	}
+	// public function relations()
+	// {
+	// 	$relations = array(
+	// 		'customer' => array(self::BELONGS_TO, 'Customer', 'customer_id'),
+	// 	);
+	// 	return CMap::mergeArray($relations, parent::relations());
+	// }
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -89,7 +89,7 @@ class CustomerSMSMessage extends ActiveRecord
 		$labels = array(
 			'sms_message_id'  => Yii::t('sms_messages', 'SMS Message id'),
 			'sms_message_uid' => Yii::t('sms_messages', 'SMS Message uid'),
-			'customer_id' => Yii::t('sms_messages', 'Customer'),
+			// 'customer_id' => Yii::t('sms_messages', 'Customer'),
 			'customer_phone' => Yii::t('sms_messages', 'Customer Phone'),
 			'sms_message' 	  => Yii::t('sms_messages', 'SMS Message'),
             'date_added'     => Yii::t('sms_messages', 'Created At')
@@ -113,16 +113,16 @@ class CustomerSMSMessage extends ActiveRecord
 	{
 		$criteria = new CDbCriteria;
 
-		if (!empty($this->customer_id)) {
-            if (is_numeric($this->customer_id)) {
-                $criteria->compare('t.customer_id', $this->customer_id);
-            } else {
-                $criteria->with['customer'] = array(
-                    'condition' => 'customer.email LIKE :name OR customer.first_name LIKE :name OR customer.last_name LIKE :name',
-                    'params'    => array(':name' => '%' . $this->customer_id . '%')
-                );
-            }
-        }
+		// if (!empty($this->customer_id)) {
+  //           if (is_numeric($this->customer_id)) {
+  //               $criteria->compare('t.customer_id', $this->customer_id);
+  //           } else {
+  //               $criteria->with['customer'] = array(
+  //                   'condition' => 'customer.email LIKE :name OR customer.first_name LIKE :name OR customer.last_name LIKE :name',
+  //                   'params'    => array(':name' => '%' . $this->customer_id . '%')
+  //               );
+  //           }
+  //       }
 
 		$criteria->compare('t.customer_phone', $this->customer_phone, true);
 		$criteria->compare('t.sms_message', $this->sms_message, true);
@@ -314,29 +314,29 @@ class CustomerSMSMessage extends ActiveRecord
      * @param $customerId
      * @return int
      */
-	public static function markAllAsCompletedForCustomer($customerId)
-	{
-		$attributes = array('status' => self::STATUS_DELIVERED);
-		$instance   = new self();
-		return Yii::app()->getDb()->createCommand()->update($instance->tableName(), $attributes, 'customer_id = :id', array(':id' => (int)$customerId));
-	}
+	// public static function markAllAsCompletedForCustomer($customerId)
+	// {
+	// 	$attributes = array('status' => self::STATUS_DELIVERED);
+	// 	$instance   = new self();
+	// 	return Yii::app()->getDb()->createCommand()->update($instance->tableName(), $attributes, 'customer_id = :id', array(':id' => (int)$customerId));
+	// }
 
-    /**
-     * @return $this
-     */
-    public function broadcast()
-    {
-        $criteria = new CDbCriteria();
-        $criteria->select = 'customer_id';
-        $criteria->compare('status', User::STATUS_ACTIVE);
-        $customers = Customer::model()->findAll($criteria);
+ //    /**
+ //     * @return $this
+ //     */
+ //    public function broadcast()
+ //    {
+ //        $criteria = new CDbCriteria();
+ //        $criteria->select = 'customer_id';
+ //        $criteria->compare('status', User::STATUS_ACTIVE);
+ //        $customers = Customer::model()->findAll($criteria);
 
-        foreach ($customers as $customer) {
-            $message = clone $this;
-            $message->user_id = $customer->customer_id;
-            $message->save();
-        }
+ //        foreach ($customers as $customer) {
+ //            $message = clone $this;
+ //            $message->customer_id = $customer->customer_id;
+ //            $message->save();
+ //        }
 
-        return $this;
-    }
+ //        return $this;
+ //    }
 }

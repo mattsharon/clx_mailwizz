@@ -60,8 +60,9 @@ class Sms_callbackController extends Controller
         if(isset($request['type']) && ($request['type'] == "mo_text")){
             $body = strtolower($request['body']);
             if($body == 'help'){
+                Yii::log("inbound:".$body, CLogger::LEVEL_ERROR);
                 $template = SmsTemplate::model()->find('type=:type', array(':type'=>$body));
-                if (empty($message)) {
+                if (empty($template)) {
                     Yii::log("inbound: Cannot find help sms template", CLogger::LEVEL_ERROR);
                 }
                 else{
@@ -86,13 +87,13 @@ class Sms_callbackController extends Controller
                 if (!$blacklist->save()) {
                     Yii::log("blacklist: error save ".$blacklist->phone, CLogger::LEVEL_ERROR);
                 } else {
-                    Yii::log("blacklist: succss save ".$blacklist->phone, CLogger::LEVEL_ERROR);
+                    Yii::log("blacklist: success save ".$blacklist->phone, CLogger::LEVEL_ERROR);
                 }
             }
             else{
                 $template = SmsTemplate::model()->find('type=:type', array(':type'=>'unknown'));
-                if (empty($message)) {
-                    Yii::log("inbound: Cannot find unkown sms template", CLogger::LEVEL_ERROR);
+                if (empty($template)) {
+                    Yii::log("inbound: Cannot find unknown sms template", CLogger::LEVEL_ERROR);
                 }
                 else{
                     try{
@@ -111,7 +112,7 @@ class Sms_callbackController extends Controller
             }
         }
         else{
-            Yii::log("inbound: unkown", CLogger::LEVEL_ERROR);
+            Yii::log("inbound: unknown", CLogger::LEVEL_ERROR);
         }
         
     }

@@ -24,7 +24,7 @@ class Sms_templatesController extends Controller
     {
         $request = Yii::app()->request;
         $template = new SmsTemplate('search');
-
+        // $template = SmsTemplate::model()->find('type=:type', array(':type'=>'help'));
         $template->unsetAttributes();
         $template->attributes = (array)$request->getQuery($template->modelName, array());
         $this->setData(array(
@@ -119,7 +119,6 @@ class Sms_templatesController extends Controller
                 $this->redirect(array('sms_templates/index'));
             }
         }
-
         $template->fieldDecorator->onHtmlOptionsSetup = array($this, '_setEditorOptions');
 
         $this->setData(array(
