@@ -49,10 +49,10 @@ if ($viewCollection->renderContent) {
                     <h3 class="box-title"><?php echo IconHelper::make('glyphicon-ban-circle') .  $pageHeading;?></h3>
                 </div>
                 <div class="pull-right">
-                    <?php if (!$blacklist->isNewRecord) { ?>
-                    <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('phone_blacklist/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
+                    <?php if (!$suppressionlist->isNewRecord) { ?>
+                    <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('phone_suppressionlist/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
                     <?php } ?>
-                    <?php echo HtmlHelper::accessLink(IconHelper::make('cancel') . Yii::t('app', 'Cancel'), array('phone_blacklist/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Cancel')));?>
+                    <?php echo HtmlHelper::accessLink(IconHelper::make('cancel') . Yii::t('app', 'Cancel'), array('phone_suppressionlist/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Cancel')));?>
                 </div>
                 <div class="clearfix"><!-- --></div>
             </div>
@@ -72,18 +72,18 @@ if ($viewCollection->renderContent) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <?php echo $form->labelEx($blacklist, 'phone');?>
-                            <?php echo $form->textField($blacklist, 'phone', $blacklist->getHtmlOptions('phone')); ?>
-                            <?php echo $form->error($blacklist, 'phone');?>
+                            <?php echo $form->labelEx($suppressionlist, 'phone');?>
+                            <?php echo $form->textField($suppressionlist, 'phone', $suppressionlist->getHtmlOptions('phone')); ?>
+                            <?php echo $form->error($suppressionlist, 'phone');?>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <?php echo $form->labelEx($blacklist, 'reason');?>
-                            <?php echo $form->textArea($blacklist, 'reason', $blacklist->getHtmlOptions('reason', array('rows' => 10))); ?>
-                            <?php echo $form->error($blacklist, 'reason');?>
+                            <?php echo $form->labelEx($suppressionlist, 'reason');?>
+                            <?php echo $form->textArea($suppressionlist, 'reason', $suppressionlist->getHtmlOptions('reason', array('rows' => 10))); ?>
+                            <?php echo $form->error($suppressionlist, 'reason');?>
                         </div>
                     </div>
                 </div>

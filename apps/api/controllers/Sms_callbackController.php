@@ -57,7 +57,7 @@ class Sms_callbackController extends Controller
         $rawbody = Yii::app()->request->getRawBody();
         $request = json_decode($rawbody, true);
         $client = new Clx\Xms\Client('saberlinkl1', '5841eb6a74e049d29b9b609ba97cca54');
-        if(isset($request['type']) && ($request['type'] == "mo_text")){
+        if(isset($request['type']) && ($request['type'] == "mo_text" || $request['type'] == "mo_binary")){
             $body = strtolower($request['body']);
             if($body == 'help'){
                 Yii::log("inbound:".$body, CLogger::LEVEL_ERROR);
@@ -69,7 +69,7 @@ class Sms_callbackController extends Controller
                     try{
                         $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
                         $batchParams->setSender('25720');
-                        $batchParams->setRecipients(["447397077911"]);
+                        $batchParams->setRecipients([$request['from']]);
                         $batchParams->setBody($template->content);
                         $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
                         $msg = $client->createTextBatch($batchParams);
@@ -81,13 +81,13 @@ class Sms_callbackController extends Controller
                 }
             }
             else if($body == 'stop'){
-                $blacklist  = new PhoneBlacklist();
-                $blacklist->phone = $request['from'];
-                $blacklist->reason = $body;
-                if (!$blacklist->save()) {
-                    Yii::log("blacklist: error save ".$blacklist->phone, CLogger::LEVEL_ERROR);
+                $suppressionlist  = new Phonesuppressionlist();
+                $suppressionlist->phone = $request['from'];
+                $suppressionlist->reason = $body;
+                if (!$suppressionlist->save()) {
+                    Yii::log("suppressionlist: error save ".$suppressionlist->phone, CLogger::LEVEL_ERROR);
                 } else {
-                    Yii::log("blacklist: success save ".$blacklist->phone, CLogger::LEVEL_ERROR);
+                    Yii::log("suppressionlist: success save ".$suppressionlist->phone, CLogger::LEVEL_ERROR);
                 }
             }
             else{
@@ -99,7 +99,7 @@ class Sms_callbackController extends Controller
                     try{
                         $batchParams = new \Clx\Xms\Api\MtBatchTextSmsCreate();
                         $batchParams->setSender('25720');
-                        $batchParams->setRecipients(["447397077911"]);
+                        $batchParams->setRecipients([$request['from']]);
                         $batchParams->setBody($template->content);
                         $batchParams->setDeliveryReport(Clx\Xms\DeliveryReportType::FULL);
                         $msg = $client->createTextBatch($batchParams);
@@ -112,7 +112,7 @@ class Sms_callbackController extends Controller
             }
         }
         else{
-            Yii::log("inbound: unknown", CLogger::LEVEL_ERROR);
+            Yii::log("inbound: unknown".$rawbody, CLogger::LEVEL_ERROR);
         }
         
     }

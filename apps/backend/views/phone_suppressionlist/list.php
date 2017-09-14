@@ -31,19 +31,19 @@ if ($viewCollection->renderContent) { ?>
         <div class="box-header">
             <div class="pull-left">
                 <h3 class="box-title">
-                    <?php echo IconHelper::make('glyphicon-ban-circle') . Yii::t('phone_blacklist', 'Blacklisted phone numbers');?>
+                    <?php echo IconHelper::make('glyphicon-ban-circle') . Yii::t('phone_suppressionlist', 'Suppression Phone numbers');?>
                 </h3>
             </div>
             <div class="pull-right">
-                <?php echo HtmlHelper::accessLink(IconHelper::make('delete') . Yii::t('app', 'Remove all'), array('phone_blacklist/delete_all'), array('class' => 'btn btn-danger btn-flat delete-all', 'title' => Yii::t('app', 'Remove all'), 'data-message' => Yii::t('dashboard', 'Are you sure you want to remove all blacklisted phones?')));?>
-                <?php echo HtmlHelper::accessLink(IconHelper::make('export') . Yii::t('app', 'Export'), array('phone_blacklist/export'), array('class' => 'btn btn-primary btn-flat', 'target' => '_blank', 'title' => Yii::t('app', 'Export')));?>
+                <?php echo HtmlHelper::accessLink(IconHelper::make('delete') . Yii::t('app', 'Remove all'), array('phone_suppressionlist/delete_all'), array('class' => 'btn btn-danger btn-flat delete-all', 'title' => Yii::t('app', 'Remove all'), 'data-message' => Yii::t('dashboard', 'Are you sure you want to remove all suppressionlisted phones?')));?>
+                <?php echo HtmlHelper::accessLink(IconHelper::make('export') . Yii::t('app', 'Export'), array('phone_suppressionlist/export'), array('class' => 'btn btn-primary btn-flat', 'target' => '_blank', 'title' => Yii::t('app', 'Export')));?>
                 <?php 
-                if (AccessHelper::hasRouteAccess('phone_blacklist/import')) {
+                if (AccessHelper::hasRouteAccess('phone_suppressionlist/import')) {
                     echo CHtml::link(IconHelper::make('import') . Yii::t('app', 'Import'), '#csv-import-modal', array('data-toggle' => 'modal', 'class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Import')));
                 }
                 ?>
-                <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('phone_blacklist/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
-                <?php echo HtmlHelper::accessLink(IconHelper::make('refresh') . Yii::t('app', 'Refresh'), array('phone_blacklist/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Refresh')));?>
+                <?php echo HtmlHelper::accessLink(IconHelper::make('create') . Yii::t('app', 'Create new'), array('phone_suppressionlist/create'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Create new')));?>
+                <?php echo HtmlHelper::accessLink(IconHelper::make('refresh') . Yii::t('app', 'Refresh'), array('phone_suppressionlist/index'), array('class' => 'btn btn-primary btn-flat', 'title' => Yii::t('app', 'Refresh')));?>
             </div>
             <div class="clearfix"><!-- --></div>
         </div>
@@ -66,17 +66,17 @@ if ($viewCollection->renderContent) { ?>
             // and render if allowed
             if ($collection->renderGrid) {
                 // since 1.3.5.4
-                if (AccessHelper::hasRouteAccess('phone_blacklist/bulk_action')) { 
+                if (AccessHelper::hasRouteAccess('phone_suppressionlist/bulk_action')) { 
                     $this->widget('common.components.web.widgets.GridViewBulkAction', array(
-                        'model'      => $blacklist,
-                        'formAction' => $this->createUrl('phone_blacklist/bulk_action'),
+                        'model'      => $suppressionlist,
+                        'formAction' => $this->createUrl('phone_suppressionlist/bulk_action'),
                     ));
                 }
                 $this->widget('zii.widgets.grid.CGridView', $hooks->applyFilters('grid_view_properties', array(
                     'ajaxUrl'           => $this->createUrl($this->route),
-                    'id'                => $blacklist->modelName.'-grid',
-                    'dataProvider'      => $blacklist->search(),
-                    'filter'            => $blacklist,
+                    'id'                => $suppressionlist->modelName.'-grid',
+                    'dataProvider'      => $suppressionlist->search(),
+                    'filter'            => $suppressionlist,
                     'filterPosition'    => 'body',
                     'filterCssClass'    => 'grid-filter-cell',
                     'itemsCssClass'     => 'table table-hover',
@@ -95,7 +95,7 @@ if ($viewCollection->renderContent) { ?>
                             'class'               => 'CCheckBoxColumn',
                             'name'                => 'phone_id',
                             'checkBoxHtmlOptions' => array('name' => 'phone_id[]'),
-                            'visible'             => AccessHelper::hasRouteAccess('phone_blacklist/bulk_action'),
+                            'visible'             => AccessHelper::hasRouteAccess('phone_suppressionlist/bulk_action'),
                         ),
                         array(
                             'name'  => 'phone',
@@ -115,21 +115,21 @@ if ($viewCollection->renderContent) { ?>
                         array(
                             'class'     => 'CButtonColumn',
                             'header'    => Yii::t('app', 'Options'),
-                            'footer'    => $blacklist->paginationOptions->getGridFooterPagination(),
+                            'footer'    => $suppressionlist->paginationOptions->getGridFooterPagination(),
                             'buttons'   => array(
                                 'update' => array(
                                     'label'     => IconHelper::make('update'), 
-                                    'url'       => 'Yii::app()->createUrl("phone_blacklist/update", array("id" => $data->phone_id))',
+                                    'url'       => 'Yii::app()->createUrl("phone_suppressionlist/update", array("id" => $data->phone_id))',
                                     'imageUrl'  => null,
                                     'options'   => array('title' => Yii::t('app', 'Update'), 'class' => 'btn btn-primary btn-flat'),
-                                    'visible'   => 'AccessHelper::hasRouteAccess("phone_blacklist/update")',
+                                    'visible'   => 'AccessHelper::hasRouteAccess("phone_suppressionlist/update")',
                                 ),
                                 'delete' => array(
                                     'label'     => IconHelper::make('delete'), 
-                                    'url'       => 'Yii::app()->createUrl("phone_blacklist/delete", array("id" => $data->phone_id))',
+                                    'url'       => 'Yii::app()->createUrl("phone_suppressionlist/delete", array("id" => $data->phone_id))',
                                     'imageUrl'  => null,
                                     'options'   => array('title' => Yii::t('app', 'Delete'), 'class' => 'btn btn-danger btn-flat delete'),
-                                    'visible'   => 'AccessHelper::hasRouteAccess("phone_blacklist/delete")',
+                                    'visible'   => 'AccessHelper::hasRouteAccess("phone_suppressionlist/delete")',
                                 ),    
                             ),
                             'headerHtmlOptions' => array('style' => 'text-align: right'),
@@ -161,16 +161,16 @@ if ($viewCollection->renderContent) { ?>
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title"><?php echo Yii::t('phone_blacklist', 'Import from CSV file');?></h4>
+              <h4 class="modal-title"><?php echo Yii::t('phone_suppressionlist', 'Import from CSV file');?></h4>
             </div>
             <div class="modal-body">
                  <div class="callout callout-info">
-                    <?php echo Yii::t('phone_blacklist', 'Please note, the csv file must contain a header with at least the phone column.');?><br />
-                    <?php echo Yii::t('phone_blacklist', 'If unsure about how to format your file, do an export first and see how the file looks.');?>
+                    <?php echo Yii::t('phone_suppressionlist', 'Please note, the csv file must contain a header with at least the phone column.');?><br />
+                    <?php echo Yii::t('phone_suppressionlist', 'If unsure about how to format your file, do an export first and see how the file looks.');?>
                  </div>
                 <?php 
                 $form = $this->beginWidget('CActiveForm', array(
-                    'action'        => array('phone_blacklist/import'),
+                    'action'        => array('phone_suppressionlist/import'),
                     'htmlOptions'   => array(
                         'id'        => 'import-csv-form', 
                         'enctype'   => 'multipart/form-data'
@@ -178,9 +178,9 @@ if ($viewCollection->renderContent) { ?>
                 ));
                 ?>
                 <div class="form-group">
-                    <?php echo $form->labelEx($blacklist, 'file');?>
-                    <?php echo $form->fileField($blacklist, 'file', $blacklist->getHtmlOptions('file')); ?>
-                    <?php echo $form->error($blacklist, 'file');?>
+                    <?php echo $form->labelEx($suppressionlist, 'file');?>
+                    <?php echo $form->fileField($suppressionlist, 'file', $suppressionlist->getHtmlOptions('file')); ?>
+                    <?php echo $form->error($suppressionlist, 'file');?>
                 </div>
                 <?php $this->endWidget(); ?>
             </div>

@@ -140,14 +140,11 @@ class LeftSideNavigationWidget extends CWidget
                     array('url' => array('email_blacklist_suggest/index'), 'label' => Yii::t('app', 'Blacklist suggestions'), 'active' => strpos($route, 'email_blacklist_suggest') === 0),
                 ),
             ),
-            'sms-phone-blacklist' => array(
-                'name'      => Yii::t('app', 'Phone blacklist'),
+            'sms-phone-suppressionlist' => array(
+                'name'      => Yii::t('app', 'Phone Suppressionlist'),
                 'icon'      => 'glyphicon-ban-circle',
-                'active'    => 'phone_blacklist',
-                'route'     => null,
-                'items'     => array(
-                    array('url' => array('phone_blacklist/index'), 'label' => Yii::t('app', 'Phone blacklist'), 'active' => $route == 'phone_blacklist' || strpos($route, 'phone_blacklist/') === 0),
-                ),
+                'active'    => 'phone_suppressionlist',
+                'route'     => array('phone_suppressionlist/index'),
             ),
             'extend' => array(
                 'name'      => Yii::t('app', 'Extend'),

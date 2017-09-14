@@ -1,7 +1,7 @@
 <?php defined('MW_PATH') || exit('No direct script access allowed');
 
 /**
- * EmailBlacklist
+ * Emailsuppressionlist
  *
  * @package MailWizz EMA
  * @author Serban George Cristian <cristian.serban@mailwizz.com>
@@ -12,9 +12,9 @@
  */
 
 /**
- * This is the model class for table "email_blacklist".
+ * This is the model class for table "email_suppressionlist".
  *
- * The followings are the available columns in table 'email_blacklist':
+ * The followings are the available columns in table 'email_suppressionlist':
  * @property integer $email_id
  * @property integer $subscriber_id
  * @property string $email
@@ -22,7 +22,7 @@
  * @property string $date_added
  * @property string $last_updated
  */
-class PhoneBlacklist extends ActiveRecord
+class Phonesuppressionlist extends ActiveRecord
 {
     const CHECK_ZONE_LIST_IMPORT = 'list import';
 
@@ -35,7 +35,7 @@ class PhoneBlacklist extends ActiveRecord
      */
     public function tableName()
     {
-        return '{{customer_phone_blacklist}}';
+        return '{{customer_phone_suppressionlist}}';
     }
 
     /**
@@ -80,9 +80,9 @@ class PhoneBlacklist extends ActiveRecord
     public function attributeLabels()
     {
         $labels = array(
-            'phone_id'      => Yii::t('phone_blacklist', 'Phone ID'),
-            'phone'         => Yii::t('phone_blacklist', 'Phone'),
-            'reason'        => Yii::t('phone_blacklist', 'Reason'),
+            'phone_id'      => Yii::t('phone_suppressionlist', 'Phone ID'),
+            'phone'         => Yii::t('phone_suppressionlist', 'Phone'),
+            'reason'        => Yii::t('phone_suppressionlist', 'Reason'),
         );
 
         return CMap::mergeArray($labels, parent::attributeLabels());
@@ -124,7 +124,7 @@ class PhoneBlacklist extends ActiveRecord
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return EmailBlacklist the static model class
+     * @return Emailsuppressionlist the static model class
      */
     public static function model($className=__CLASS__)
     {
@@ -133,7 +133,7 @@ class PhoneBlacklist extends ActiveRecord
 
     protected function beforeSave()
     {
-        if ($this->getIsNewRecord() && MW_PERF_LVL && MW_PERF_LVL & MW_PERF_LVL_DISABLE_NEW_BLACKLIST_RECORDS) {
+        if ($this->getIsNewRecord() && MW_PERF_LVL && MW_PERF_LVL & MW_PERF_LVL_DISABLE_NEW_suppressionlist_RECORDS) {
             return false;
         }
         
