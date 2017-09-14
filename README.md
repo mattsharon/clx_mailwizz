@@ -1,4 +1,6 @@
-MailWizz - Email marketing application.  
+MailWizz - Email marketing application.
+
+Yii Framework Application
 ========
     
 INSTALL STEPS: https://kb.mailwizz.com/articles/install-steps/  
